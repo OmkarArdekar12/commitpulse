@@ -16,7 +16,7 @@ export function getSizeScale(size?: 'small' | 'medium' | 'large') {
   return 1;
 }
 
-function truncateUsername(username: string): string {
+export function truncateUsername(username: string): string {
   return username.length > 12 ? `${username.slice(0, 12)}...` : username;
 }
 
