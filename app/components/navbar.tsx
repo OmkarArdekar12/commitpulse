@@ -90,7 +90,6 @@ export default function Navbar() {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Glow effects remain untouched */}
           <div
             className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-out hidden dark:block"
             style={{
@@ -125,7 +124,6 @@ export default function Navbar() {
                   className="transition-transform duration-300 group-hover:rotate-6"
                 />
               </span>
-              {/* Added Text Gradient here */}
               <span className="text-base font-bold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 sm:text-lg">
                 CommitPulse
               </span>
@@ -153,7 +151,6 @@ export default function Navbar() {
                 </a>
               ))}
 
-              {/* Separator line between links and theme toggle */}
               <div className="mx-2 h-6 w-px bg-gray-200 dark:bg-white/15" />
 
               <button
@@ -180,7 +177,6 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Mobile Menu Buttons */}
             <div className="md:hidden inline-flex items-center justify-center gap-1">
               <button
                 type="button"
@@ -220,7 +216,6 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* Mobile Dropdown Menu */}
           {open ? (
             <div className="border-t border-gray-100 dark:border-white/10 px-4 py-4 md:hidden">
               <ul className="space-y-1">

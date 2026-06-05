@@ -115,9 +115,7 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-black/5 bg-white/50 px-4 py-8 backdrop-blur dark:border-white/5 dark:bg-zinc-950/50 sm:px-6 md:py-12">
       <div className="mx-auto max-w-6xl">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
-          {/* Brand Section */}
           <div className="flex flex-col items-center sm:items-start lg:col-span-1">
             <h2 className="font-bold text-lg text-black dark:text-white">CommitPulse</h2>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
@@ -125,7 +123,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Navigation Section */}
           <div className="flex flex-col items-center sm:items-start">
             <h3 className="font-semibold text-sm text-black dark:text-white mb-3">Navigation</h3>
             <nav className="flex flex-col gap-2 text-center sm:text-left">
@@ -142,7 +139,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Resources Section */}
           <div className="flex flex-col items-center sm:items-start">
             <h3 className="font-semibold text-sm text-black dark:text-white mb-3">Resources</h3>
             <nav className="flex flex-col gap-2 text-center sm:text-left">
@@ -159,7 +155,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Connect Section */}
           <div className="flex flex-col items-center sm:items-start">
             <h3 className="font-semibold text-sm text-black dark:text-white mb-3">Connect</h3>
             <div className="flex flex-col gap-2">
@@ -178,10 +173,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-black/5 dark:border-white/5" />
 
-        {/* Bottom Section */}
         <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-zinc-500 dark:text-zinc-500">
           <p>© {currentYear} CommitPulse. All rights reserved.</p>
           <p>Made with ❤️ for developers</p>
