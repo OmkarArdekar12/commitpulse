@@ -4,10 +4,10 @@ import { describe, expect, it } from 'vitest';
 import {
   SVG_WIDTH,
   SVG_HEIGHT,
-  FONT_MAP,
   CONTRIBUTION_MILESTONES,
   STREAK_MILESTONES,
 } from './constants';
+import { FONT_MAP } from './fonts';
 
 describe('SVG Constants Mouse Interactivity', () => {
   it('provides valid SVG dimensions for interactive layouts', () => {

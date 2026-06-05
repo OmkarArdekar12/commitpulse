@@ -4,14 +4,16 @@ import { describe, expect, it } from 'vitest';
 import {
   SVG_WIDTH,
   SVG_HEIGHT,
+  CONTRIBUTION_MILESTONES,
+  STREAK_MILESTONES,
+} from './constants';
+import {
   GHOST_HEIGHT_PX,
   LOG_SCALE_MULTIPLIER,
   LINEAR_SCALE_MULTIPLIER,
   MAX_LOG_HEIGHT,
   MAX_LINEAR_HEIGHT,
-  CONTRIBUTION_MILESTONES,
-  STREAK_MILESTONES,
-} from './constants';
+} from './layoutConstants';
 
 describe('SVG Constants Massive Scaling', () => {
   it('supports large simulated contribution datasets', () => {
