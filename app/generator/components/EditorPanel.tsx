@@ -6,7 +6,6 @@ import { DescriptionSection } from './sections/DescriptionSection';
 import { TechnologiesSection } from './sections/TechnologiesSection';
 import { SocialsSection } from './sections/SocialsSection';
 import { CommitPulseSection } from './sections/CommitPulseSection';
-import { ContributionGraphSection } from './sections/ContributionGraphSection';
 import { GitHubImportModal } from './GitHubImportModal';
 import { FaGithub } from 'react-icons/fa';
 import type { GeneratorState } from '../types';
@@ -83,16 +82,6 @@ export function EditorPanel({
         onGithubUsernameChange={onGithubUsernameChange}
         onShowCommitPulseChange={onShowCommitPulseChange}
         onCommitPulseAccentChange={onCommitPulseAccentChange}
-      />
-      <ContributionGraphSection
-        githubUsername={state.githubUsername}
-        showSnakeGraph={state.showSnakeGraph}
-        showPacmanGraph={state.showPacmanGraph}
-        graphPlacement={state.graphPlacement}
-        onGithubUsernameChange={onGithubUsernameChange}
-        onShowSnakeGraphChange={onShowSnakeGraphChange}
-        onShowPacmanGraphChange={onShowPacmanGraphChange}
-        onGraphPlacementChange={onGraphPlacementChange}
       />
     </form>
   );
