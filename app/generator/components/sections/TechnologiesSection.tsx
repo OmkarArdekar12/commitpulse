@@ -6,7 +6,6 @@ import { TECHNOLOGIES, TECH_CATEGORIES } from '../../data/technologies';
 import { SectionCard, FieldLabel } from '../SectionCard';
 import type { Technology } from '../../types';
 import { getRecommendations } from '@/lib/graph/recommendationEngine';
-import { TechnologyGraph } from './TechnologyGraph';
 
 interface TechnologiesSectionProps {
   selected: string[];

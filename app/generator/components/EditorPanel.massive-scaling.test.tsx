@@ -3,12 +3,10 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { EditorPanel } from './EditorPanel';
 import type { GeneratorState } from '../types';
 
-// Mock useDebounce hook to bypass the 500ms input debounce delay
 vi.mock('@/hooks/useDebounce', () => ({
   useDebounce: (value: unknown) => value,
 }));
 
-// Setup base handlers
 const makeHandlers = () => ({
   onNameChange: vi.fn(),
   onDescriptionChange: vi.fn(),
@@ -18,13 +16,9 @@ const makeHandlers = () => ({
   onGithubUsernameChange: vi.fn(),
   onShowCommitPulseChange: vi.fn(),
   onCommitPulseAccentChange: vi.fn(),
-  onShowSnakeGraphChange: vi.fn(),
-  onShowPacmanGraphChange: vi.fn(),
-  onGraphPlacementChange: vi.fn(),
   onApplyImport: vi.fn(),
 });
 
-// Setup base state helper
 const makeState = (overrides: Partial<GeneratorState> = {}): GeneratorState => ({
   name: '',
   description: '',
@@ -34,14 +28,10 @@ const makeState = (overrides: Partial<GeneratorState> = {}): GeneratorState => (
   githubUsername: '',
   showCommitPulse: false,
   commitPulseAccent: '',
-  showSnakeGraph: false,
-  showPacmanGraph: false,
-  graphPlacement: 'bottom',
   ...overrides,
 });
 
 describe('EditorPanel - Massive Scaling & Extreme Bounds', () => {
-  // Test Case 1: Name and Description Inputs with Massive Character Strings
   it('handles name and description with massive character strings without breaking or crashing', () => {
     const handlers = makeHandlers();
     const massiveName = 'A'.repeat(20000);
@@ -54,48 +44,41 @@ describe('EditorPanel - Massive Scaling & Extreme Bounds', () => {
 
     render(<EditorPanel state={state} {...handlers} />);
 
-    // Verify Name input field holds the value correctly
     const nameInput = screen.getByLabelText(/^display name$/i) as HTMLInputElement;
     expect(nameInput).toBeInTheDocument();
     expect(nameInput.value).toBe(massiveName);
 
-    // Verify Description textarea holds the value correctly
     const descTextarea = screen.getByLabelText(/^bio \/ tagline$/i) as HTMLTextAreaElement;
     expect(descTextarea).toBeInTheDocument();
     expect(descTextarea.value).toBe(massiveDescription);
 
-    // Change input with an even larger name and check callback
     const newMassiveName = 'C'.repeat(30000);
     fireEvent.change(nameInput, { target: { value: newMassiveName } });
     expect(handlers.onNameChange).toHaveBeenCalledWith(newMassiveName);
   });
 
-  // Test Case 2: Technologies Section Scaling (Massive Grid Load)
-  it('renders Technologies Section with thousands of selected tech items without crashing', () => {
+  it('renders Technologies section with thousands of selected tech items without crashing', () => {
     const handlers = makeHandlers();
-    // Simulate thousands of selected techs
     const massiveSelectedTechs = Array.from({ length: 5000 }, (_, i) => `tech-id-${i}`);
     const state = makeState({
       selectedTechs: massiveSelectedTechs,
     });
 
-    const { container } = render(<EditorPanel state={state} {...handlers} />);
+    render(<EditorPanel state={state} {...handlers} />);
 
-    // Assert that the component displays selected technologies counts properly
+    expect(screen.getByRole('heading', { name: /^technologies$/i })).toBeInTheDocument();
+
     const selectedCountLabel = screen.getByText(
       new RegExp(`Selected \\(${massiveSelectedTechs.length}\\)`, 'i')
     );
     expect(selectedCountLabel).toBeInTheDocument();
-
-    const techGrid = container.querySelector('#technologies-section');
-    expect(techGrid).toBeInTheDocument();
   });
 
-  // Test Case 3: Socials Section Scaling (Massive URL Load)
-  it('renders Socials Section with huge links properties under load without crashing', () => {
+  it('renders Socials section with huge links properties under load without crashing', () => {
     const handlers = makeHandlers();
     const selectedSocials = Array.from({ length: 200 }, (_, i) => `social-${i}`);
     const socialLinks: Record<string, string> = {};
+
     selectedSocials.forEach((id) => {
       socialLinks[id] = 'https://custom-domain.com/' + 'a'.repeat(2000) + `/${id}`;
     });
@@ -107,20 +90,15 @@ describe('EditorPanel - Massive Scaling & Extreme Bounds', () => {
 
     render(<EditorPanel state={state} {...handlers} />);
 
-    // Confirm that the Socials section card renders and mounts successfully
     expect(screen.getByText('Socials')).toBeInTheDocument();
   });
 
-  // Test Case 4: Extreme Color Inputs & High Boundary Values for Graph Sections
-  it('handles custom HEX color inputs and switch boundaries with emojis, special characters and long inputs', () => {
+  it('handles custom accent inputs and switch boundaries with long invalid values', () => {
     const handlers = makeHandlers();
     const state = makeState({
-      githubUsername: 'a'.repeat(10000), // Enormous username
+      githubUsername: 'a'.repeat(10000),
       showCommitPulse: true,
       commitPulseAccent: '🚀emoji_invalid_hex_value_with_excessive_length!@#$',
-      showSnakeGraph: true,
-      showPacmanGraph: true,
-      graphPlacement: 'top',
     });
 
     render(<EditorPanel state={state} {...handlers} />);
@@ -129,11 +107,9 @@ describe('EditorPanel - Massive Scaling & Extreme Bounds', () => {
     expect(usernameInput).toBeInTheDocument();
     expect(usernameInput.value).toBe('a'.repeat(10000));
 
-    // Warn message should render for the invalid hex
     expect(screen.getByText(/invalid hex/i)).toBeInTheDocument();
   });
 
-  // Test Case 5: High-Frequency Update Performance Stress-Test
   it('renders and processes rapid state updates under heavy load efficiently', () => {
     const handlers = makeHandlers();
     const state = makeState();
@@ -150,7 +126,6 @@ describe('EditorPanel - Massive Scaling & Extreme Bounds', () => {
           githubUsername: '',
           showCommitPulse: i % 2 === 0,
           commitPulseAccent: i % 2 === 0 ? '10b981' : '',
-          showSnakeGraph: i % 2 === 0,
         });
 
         rerender(<EditorPanel state={updatedState} {...handlers} />);
