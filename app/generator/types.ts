@@ -53,7 +53,4 @@ export interface GeneratorState {
   githubUsername: string;
   showCommitPulse: boolean;
   commitPulseAccent: string;
-  showSnakeGraph: boolean;
-  showPacmanGraph: boolean;
-  graphPlacement: 'top' | 'middle' | 'bottom';
 }

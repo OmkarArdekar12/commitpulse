@@ -39,11 +39,6 @@ describe('EditorPanel Theme Contrast', () => {
     githubUsername: '',
     showCommitPulse: false,
     commitPulseAccent: '',
-
-    // Required GeneratorState fields
-    showSnakeGraph: false,
-    showPacmanGraph: false,
-    graphPlacement: 'bottom',
   };
   const defaultProps = {
     state: mockState,
